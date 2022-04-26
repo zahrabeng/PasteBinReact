@@ -16,7 +16,15 @@ export default function Main (): JSX.Element {
            setPaste(data.data)
        }
        getAllPastes()
-    }, [])
+    }, [paste])
+
+    async function submitData(){
+        await axios.post(herokuURL, {
+            code: code,
+            language: language
+          });
+        
+    }
 
     function getLanguage(event:any){
         setLanguage(event);
@@ -34,7 +42,6 @@ export default function Main (): JSX.Element {
         )
     }
     
-    
     const allPastes = paste.map((onePaste:PasteTypes) => (<li key={onePaste.id}>{onePaste.code}{onePaste.language}</li>))
     
     return (
@@ -42,7 +49,7 @@ export default function Main (): JSX.Element {
         <textarea id="allpastes" name="allpastes" rows={15} cols={80} onChange = {(e) => setCode(e.target.value)}/>     
         {dropDownList()}
         {allPastes}
-        {console.log(language)}
+        <button onClick = {submitData}>SUBMIT</button>
        </>
     )
 
