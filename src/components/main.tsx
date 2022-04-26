@@ -48,8 +48,8 @@ export default function Main (): JSX.Element {
        <>
         <textarea id="allpastes" name="allpastes" rows={15} cols={80} onChange = {(e) => setCode(e.target.value)}/>     
         {dropDownList()}
-        {allPastes}
         <button onClick = {submitData}>SUBMIT</button>
+        {allPastes}
        </>
     )
 
