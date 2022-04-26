@@ -18,22 +18,21 @@ export default function Main (): JSX.Element {
        getAllPastes()
     }, [])
 
+    function getLanguage(event:any){
+        setLanguage(event);
+    }
+
     function dropDownList() :JSX.Element{
         return(
-            <select>
-                <option onClick={() => setLanguage('Python')} >Python</option>
-                <option onClick={() => setLanguage('Css')} >Css</option>
-                <option onClick={() => setLanguage('Javascript')} >Javascript</option>
-                <option onClick={() => setLanguage('Typescript')} >Typescript</option>
+            <select onChange = {(e) => getLanguage(e.target.value)}>
+                <option>Python</option>
+                <option>Css</option>
+                <option>Javascript</option>
+                <option>Typescript</option>
             </select> 
-        
-
         )
-
     }
     
-
-
     
     const allPastes = paste.map((onePaste:PasteTypes) => (<li key={onePaste.id}>{onePaste.code}{onePaste.language}</li>))
     
