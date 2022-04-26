@@ -4,7 +4,7 @@ import { useEffect } from "react"
 import axios from "axios";
 
 export default function Main (): JSX.Element {
-    const [paste, setPaste] = useState <PasteTypes>()
+    const [paste, setPaste] = useState <PasteTypes[]>([])
     const herokuURL = "https://pastebinserver.herokuapp.com/pastes"
 
     useEffect (() => {
@@ -15,11 +15,12 @@ export default function Main (): JSX.Element {
        getAllPastes()
     }, [])
 
-
+    
+    const allPastes = paste.map((onePaste:PasteTypes) => (<li key={onePaste.id}>{onePaste.code}{onePaste.language}</li>))
     
     return (
        <>
-       <div></div>
+        {allPastes}
        </>
     )
 
