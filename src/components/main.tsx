@@ -29,6 +29,7 @@ export default function Main (): JSX.Element {
                 <option>Css</option>
                 <option>Javascript</option>
                 <option>Typescript</option>
+                <option>Other</option>
             </select> 
         )
     }
