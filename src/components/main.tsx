@@ -5,6 +5,8 @@ import axios from "axios";
 
 export default function Main (): JSX.Element {
     const [paste, setPaste] = useState <PasteTypes[]>([])
+    const [code, setCode] = useState("")
+
     const herokuURL = "https://pastebinserver.herokuapp.com/pastes"
 
     useEffect (() => {
@@ -15,12 +17,14 @@ export default function Main (): JSX.Element {
        getAllPastes()
     }, [])
 
+
     
     const allPastes = paste.map((onePaste:PasteTypes) => (<li key={onePaste.id}>{onePaste.code}{onePaste.language}</li>))
     
     return (
        <>
-        {allPastes}
+    <textarea id="allpastes" name="allpastes" rows={15} cols={80} onChange = {(e) => setCode(e.target.value)}/>        
+    {allPastes}
        </>
     )
 
