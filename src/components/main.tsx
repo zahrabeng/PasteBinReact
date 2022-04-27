@@ -19,6 +19,17 @@ export default function Main(): JSX.Element {
     getAllPastes();
   }, [paste]);
 
+
+    async function handleEdit(id:number){
+        const data = await axios.get(`https://pastebinserver.herokuapp.com/pastes/${id}`)
+        setCode(data.data[0].code)
+        setTitle(data.data[0].title)
+        setLanguage(data.data[0].language)
+    }
+
+
+
+
   async function submitData() {
     if (code === "") {
       window.alert("Code needs to be added for submission");
@@ -29,23 +40,23 @@ export default function Main(): JSX.Element {
         title: title,
       });
     }
-    setTitle("")
-    setCode("")
-    setLanguage("none")
-    
+    setTitle("");
+    setCode("");
+    setLanguage("none");
   }
 
-//   async function handleEdit(id:number){
+//   async function handleEdit(id: number) {
 //     if (code === "") {
-//         window.alert("Code needs to be added for submission");
-//     } else{
-//     await axios.put(`https://pastebinserver.herokuapp.com/pastes/${id}`), {
-//         code: code,
-//         language: language,
-//         title: title,
+//       window.alert("Code needs to be added for submission");
+//     } else {
+//       await axios.put(`https://pastebinserver.herokuapp.com/pastes/${id}`),
+//         {
+//           code: code,
+//           language: language,
+//           title: title,
+//         };
 //     }
-//     }
-//     }
+//   }
 
   async function handleDelete(id: number) {
     axios.delete(`https://pastebinserver.herokuapp.com/pastes/${id}`);
@@ -74,7 +85,7 @@ export default function Main(): JSX.Element {
       {onePaste.language}
       {onePaste.title}
       <button onClick={() => handleDelete(onePaste.id)}>Delete</button>
-      {/* <button onClick={() => handleEdit(onePaste.id)}>Edit</button> */}
+      <button onClick={() => handleEdit(onePaste.id)}>Edit</button>
     </div>
   ));
 
