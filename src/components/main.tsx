@@ -59,6 +59,7 @@ export default function Main(): JSX.Element {
            title: title,
        });
      }
+     setClick(true)
   }
     
 
