@@ -29,19 +29,23 @@ export default function Main(): JSX.Element {
         title: title,
       });
     }
+    setTitle("")
+    setCode("")
+    setLanguage("none")
+    
   }
 
-  async function handleEdit(id:number){
-    if (code === "") {
-        window.alert("Code needs to be added for submission");
-    } else{
-    await axios.put(`https://pastebinserver.herokuapp.com/pastes/${id}`), {
-        code: code,
-        language: language,
-        title: title,
-    }
-    }
-    }
+//   async function handleEdit(id:number){
+//     if (code === "") {
+//         window.alert("Code needs to be added for submission");
+//     } else{
+//     await axios.put(`https://pastebinserver.herokuapp.com/pastes/${id}`), {
+//         code: code,
+//         language: language,
+//         title: title,
+//     }
+//     }
+//     }
 
   async function handleDelete(id: number) {
     axios.delete(`https://pastebinserver.herokuapp.com/pastes/${id}`);
@@ -53,7 +57,7 @@ export default function Main(): JSX.Element {
 
   function dropDownList(): JSX.Element {
     return (
-      <select onChange={(e) => getLanguage(e.target.value)}>
+      <select onChange={(e) => getLanguage(e.target.value)} value={language}>
         <option>None</option>
         <option>Python</option>
         <option>Css</option>
@@ -70,7 +74,7 @@ export default function Main(): JSX.Element {
       {onePaste.language}
       {onePaste.title}
       <button onClick={() => handleDelete(onePaste.id)}>Delete</button>
-      <button onClick={() => handleEdit(onePaste.id)}>Edit</button>
+      {/* <button onClick={() => handleEdit(onePaste.id)}>Edit</button> */}
     </div>
   ));
 
@@ -81,11 +85,13 @@ export default function Main(): JSX.Element {
         name="allpastes"
         rows={15}
         cols={80}
+        value={code}
         onChange={(e) => setCode(e.target.value)}
       />
       <input
         placeholder="Type title here"
         onChange={(e) => setTitle(e.target.value)}
+        value={title}
       />
       {dropDownList()}
       <button onClick={submitData}>SUBMIT</button>
