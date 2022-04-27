@@ -22,14 +22,14 @@ export default function Main(): JSX.Element {
   }, [paste]);
 
   async function handleEdit(id: number) {
-    setId(id)
+    setId(id);
     const data = await axios.get(
       `https://pastebinserver.herokuapp.com/pastes/${id}`
     );
     setCode(data.data[0].code);
     setTitle(data.data[0].title);
     setLanguage(data.data[0].language);
-    setClick(false)
+    setClick(false);
   }
 
   async function submitData() {
@@ -48,32 +48,30 @@ export default function Main(): JSX.Element {
     setClick(true);
   }
 
-  async function editPaste (){
+  async function editPaste() {
     if (code === "") {
-        window.alert("Code needs to be added for submission");
-      } else {
-    await axios.put(`https://pastebinserver.herokuapp.com/pastes/${id}`,
-         {
-           code: code,
-           language: language,
-           title: title,
-       });
-     }
-     setClick(true)
+      window.alert("Code needs to be added for submission");
+    } else {
+      await axios.put(`https://pastebinserver.herokuapp.com/pastes/${id}`, {
+        code: code,
+        language: language,
+        title: title,
+      });
+    }
+    setClick(true);
   }
-    
 
   async function handleDelete(id: number) {
     axios.delete(`https://pastebinserver.herokuapp.com/pastes/${id}`);
   }
 
-  function getLanguage(event: any) {
-    setLanguage(event);
-  }
+  //   function getLanguage(event: any) {
+  //     setLanguage(event);
+  //   }
 
   function dropDownList(): JSX.Element {
     return (
-      <select onChange={(e) => getLanguage(e.target.value)} value={language}>
+      <select onChange={(e) => setLanguage(e.target.value)} value={language}>
         <option>None</option>
         <option>Python</option>
         <option>Css</option>
