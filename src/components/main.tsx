@@ -57,6 +57,7 @@ export default function Main(): JSX.Element {
       {onePaste.code}
       {onePaste.language}
       <button onClick={() => handleDelete(onePaste.id)}>Delete</button>
+      <button>Edit</button>
     </div>
   ));
 
