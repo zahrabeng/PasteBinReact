@@ -32,8 +32,11 @@ export default function Main (): JSX.Element {
             title: title
         });
     }
-    
 }
+
+    async function handleDelete (id:number){
+        axios.delete(`https://pastebinserver.herokuapp.com/pastes/${id}`)
+    }
 
     function getLanguage(event:any){
         setLanguage(event);
@@ -52,14 +55,14 @@ export default function Main (): JSX.Element {
         )
     }
     
-    const allPastes = paste.map((onePaste:PasteTypes) => (<li key={onePaste.id}>{onePaste.code}{onePaste.language}{onePaste.title}</li>))
+    
+    const allPastes = paste.map((onePaste:PasteTypes) => (<div key={onePaste.id}>{onePaste.code}{onePaste.language}<button onClick={()=>handleDelete(onePaste.id)}>Delete</button></div>))
     
     return (
        <>
         <textarea id="allpastes" name="allpastes" rows={15} cols={80} onChange = {(e) => setCode(e.target.value)}/>
         <input
             placeholder="Type title here"
-            value={title}
             onChange={(e)=> setTitle(e.target.value)}
         />
         {dropDownList()}
