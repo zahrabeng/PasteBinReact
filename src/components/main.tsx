@@ -33,6 +33,7 @@ export default function Main (): JSX.Element {
     function dropDownList() :JSX.Element{
         return(
             <select onChange = {(e) => getLanguage(e.target.value)}>
+                <option>None</option>
                 <option>Python</option>
                 <option>Css</option>
                 <option>Javascript</option>
