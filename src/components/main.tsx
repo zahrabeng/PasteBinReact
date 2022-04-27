@@ -2,11 +2,18 @@ import PasteTypes from "./pasteTypes"
 import { useState } from "react"
 import { useEffect } from "react"
 import axios from "axios";
+import Alert from 'react-popup-alert'
+
 
 export default function Main (): JSX.Element {
     const [paste, setPaste] = useState <PasteTypes[]>([])
     const [code, setCode] = useState("")
     const [language, setLanguage] = useState("none")
+    const [alert, setAlert] = useState({
+        type: 'error',
+        text: 'This is a alert message',
+        show: false
+      })
 
     const herokuURL = "https://pastebinserver.herokuapp.com/pastes"
 
@@ -18,13 +25,24 @@ export default function Main (): JSX.Element {
        getAllPastes()
     }, [paste])
 
+    function onShowAlert(type:string) {
+        setAlert({
+          type: type,
+          text: 'Demo alert',
+          show: true
+        })
+      }
+
     async function submitData(){
+        if (code === ""){
+            onShowAlert("error") 
+        }
         await axios.post(herokuURL, {
             code: code,
             language: language
           });
-        
     }
+
 
     function getLanguage(event:any){
         setLanguage(event);
@@ -51,6 +69,7 @@ export default function Main (): JSX.Element {
         {dropDownList()}
         <button onClick = {submitData}>SUBMIT</button>
         {allPastes}
+        <Alert {alert.text}{alert.show} {alert.type}/>
        </>
     )
 
