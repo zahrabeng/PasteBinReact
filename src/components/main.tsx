@@ -31,6 +31,18 @@ export default function Main(): JSX.Element {
     }
   }
 
+  async function handleEdit(id:number){
+    if (code === "") {
+        window.alert("Code needs to be added for submission");
+    } else{
+    await axios.put(`https://pastebinserver.herokuapp.com/pastes/${id}`), {
+        code: code,
+        language: language,
+        title: title,
+    }
+    }
+    }
+
   async function handleDelete(id: number) {
     axios.delete(`https://pastebinserver.herokuapp.com/pastes/${id}`);
   }
@@ -56,8 +68,9 @@ export default function Main(): JSX.Element {
     <div key={onePaste.id}>
       {onePaste.code}
       {onePaste.language}
+      {onePaste.title}
       <button onClick={() => handleDelete(onePaste.id)}>Delete</button>
-      <button>Edit</button>
+      <button onClick={() => handleEdit(onePaste.id)}>Edit</button>
     </div>
   ));
 
