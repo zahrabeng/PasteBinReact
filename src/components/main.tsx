@@ -8,6 +8,8 @@ export default function Main(): JSX.Element {
   const [code, setCode] = useState("");
   const [language, setLanguage] = useState("none");
   const [title, setTitle] = useState("");
+  const [id, setId] = useState<number>();
+  const [click, setClick] = useState<boolean>(true);
 
   const herokuURL = "https://pastebinserver.herokuapp.com/pastes";
 
@@ -19,16 +21,16 @@ export default function Main(): JSX.Element {
     getAllPastes();
   }, [paste]);
 
-
-    async function handleEdit(id:number){
-        const data = await axios.get(`https://pastebinserver.herokuapp.com/pastes/${id}`)
-        setCode(data.data[0].code)
-        setTitle(data.data[0].title)
-        setLanguage(data.data[0].language)
-    }
-
-
-
+  async function handleEdit(id: number) {
+    setId(id)
+    const data = await axios.get(
+      `https://pastebinserver.herokuapp.com/pastes/${id}`
+    );
+    setCode(data.data[0].code);
+    setTitle(data.data[0].title);
+    setLanguage(data.data[0].language);
+    setClick(false)
+  }
 
   async function submitData() {
     if (code === "") {
@@ -43,20 +45,22 @@ export default function Main(): JSX.Element {
     setTitle("");
     setCode("");
     setLanguage("none");
+    setClick(true);
   }
 
-//   async function handleEdit(id: number) {
-//     if (code === "") {
-//       window.alert("Code needs to be added for submission");
-//     } else {
-//       await axios.put(`https://pastebinserver.herokuapp.com/pastes/${id}`),
-//         {
-//           code: code,
-//           language: language,
-//           title: title,
-//         };
-//     }
-//   }
+  async function editPaste (){
+    if (code === "") {
+        window.alert("Code needs to be added for submission");
+      } else {
+    await axios.put(`https://pastebinserver.herokuapp.com/pastes/${id}`,
+         {
+           code: code,
+           language: language,
+           title: title,
+       });
+     }
+  }
+    
 
   async function handleDelete(id: number) {
     axios.delete(`https://pastebinserver.herokuapp.com/pastes/${id}`);
@@ -105,7 +109,8 @@ export default function Main(): JSX.Element {
         value={title}
       />
       {dropDownList()}
-      <button onClick={submitData}>SUBMIT</button>
+      {click && <button onClick={submitData}>SUBMIT</button>}
+      {!click && <button onClick={editPaste}>SUBMIT EDIT</button>}
       {allPastes}
     </>
   );
