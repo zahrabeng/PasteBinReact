@@ -8,11 +8,7 @@ export default function Main (): JSX.Element {
     const [paste, setPaste] = useState <PasteTypes[]>([])
     const [code, setCode] = useState("")
     const [language, setLanguage] = useState("none")
-    const [alert, setAlert] = useState({
-        type: 'error',
-        text: 'This is a alert message',
-        show: false
-      })
+    const [title, setTitle] = useState("")
 
     const herokuURL = "https://pastebinserver.herokuapp.com/pastes"
 
@@ -32,7 +28,8 @@ export default function Main (): JSX.Element {
     else {
         await axios.post(herokuURL, {
             code: code,
-            language: language
+            language: language,
+            title: title
         });
     }
     
@@ -55,11 +52,16 @@ export default function Main (): JSX.Element {
         )
     }
     
-    const allPastes = paste.map((onePaste:PasteTypes) => (<li key={onePaste.id}>{onePaste.code}{onePaste.language}</li>))
+    const allPastes = paste.map((onePaste:PasteTypes) => (<li key={onePaste.id}>{onePaste.code}{onePaste.language}{onePaste.title}</li>))
     
     return (
        <>
-        <textarea id="allpastes" name="allpastes" rows={15} cols={80} onChange = {(e) => setCode(e.target.value)}/>     
+        <textarea id="allpastes" name="allpastes" rows={15} cols={80} onChange = {(e) => setCode(e.target.value)}/>
+        <input
+            placeholder="Type title here"
+            value={title}
+            onChange={(e)=> setTitle(e.target.value)}
+        />
         {dropDownList()}
         <button onClick = {submitData}>SUBMIT</button>
         {allPastes}
