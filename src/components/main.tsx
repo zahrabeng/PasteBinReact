@@ -6,7 +6,7 @@ import axios from "axios";
 export default function Main (): JSX.Element {
     const [paste, setPaste] = useState <PasteTypes[]>([])
     const [code, setCode] = useState("")
-    const [language, setLanguage] = useState("")
+    const [language, setLanguage] = useState("none")
 
     const herokuURL = "https://pastebinserver.herokuapp.com/pastes"
 
