@@ -95,7 +95,7 @@ export default function Main(): JSX.Element {
       <button onClick={() => handleDelete(onePaste.id)}>Delete</button>
       <button onClick={() => handleEdit(onePaste.id)}>Edit</button>
       <button onClick={()=> setShowComments(!showComments)}>Comments</button>
-      {showComments && <Comments/>}
+      {showComments && <Comments id={onePaste.id}/>}
     </div>
   ));
 

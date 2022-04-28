@@ -1,4 +1,6 @@
-export default function Comments(): JSX.Element {
+export default function Comments(props:{ id: number; }): JSX.Element {
+
+    
     return(
         <>
         <div>
