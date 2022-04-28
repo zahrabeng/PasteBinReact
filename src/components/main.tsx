@@ -59,15 +59,15 @@ export default function Main(): JSX.Element {
       });
     }
     setClick(true);
+    setTitle("");
+    setCode("");
+    setLanguage("none");
   }
 
   async function handleDelete(id: number) {
     axios.delete(`https://pastebinserver.herokuapp.com/pastes/${id}`);
   }
 
-  //   function getLanguage(event: any) {
-  //     setLanguage(event);
-  //   }
 
   function dropDownList(): JSX.Element {
     return (
