@@ -10,6 +10,8 @@ export default function Main(): JSX.Element {
   const [title, setTitle] = useState("");
   const [id, setId] = useState<number>();
   const [click, setClick] = useState<boolean>(true);
+  const [showMore, setShowMore] = useState<boolean>(false)  
+
 
   const herokuURL = "https://pastebinserver.herokuapp.com/pastes";
 
@@ -84,9 +86,10 @@ export default function Main(): JSX.Element {
 
   const allPastes = paste.map((onePaste: PasteTypes) => (
     <div key={onePaste.id}>
-      {onePaste.code}
-      {onePaste.language}
       {onePaste.title}
+      {onePaste.language}
+      {showMore ? (onePaste.code):(onePaste.code.substring(0,500))}
+      <a href="#" onClick={() => setShowMore(!showMore)}>show more</a>
       <button onClick={() => handleDelete(onePaste.id)}>Delete</button>
       <button onClick={() => handleEdit(onePaste.id)}>Edit</button>
     </div>
