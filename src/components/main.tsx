@@ -11,10 +11,8 @@ export default function Main(): JSX.Element {
   const [title, setTitle] = useState("");
   const [id, setId] = useState<number>();
   const [click, setClick] = useState<boolean>(true);
-  const [showMore, setShowMore] = useState<boolean>(false)  
-  const [showComments, setShowComments] = useState<boolean>(false)
-  
-
+  const [showMore, setShowMore] = useState<boolean>(false);
+  const [showComments, setShowComments] = useState<boolean>(false);
 
   const herokuURL = "https://pastebinserver.herokuapp.com/pastes";
 
@@ -73,7 +71,6 @@ export default function Main(): JSX.Element {
     axios.delete(`https://pastebinserver.herokuapp.com/pastes/${id}`);
   }
 
-
   function dropDownList(): JSX.Element {
     return (
       <select onChange={(e) => setLanguage(e.target.value)} value={language}>
@@ -91,12 +88,14 @@ export default function Main(): JSX.Element {
     <div key={onePaste.id}>
       {onePaste.title}
       {onePaste.language}
-      {showMore ? (onePaste.code):(onePaste.code.substring(0,500))}
-      <a href="#" onClick={() => setShowMore(!showMore)}>{showMore ? "show less" : "show more"}</a>
+      {showMore ? onePaste.code : onePaste.code.substring(0, 500)}
+      <a href="#" onClick={() => setShowMore(!showMore)}>
+        {showMore ? "show less" : "show more"}
+      </a>
       <button onClick={() => handleDelete(onePaste.id)}>Delete</button>
       <button onClick={() => handleEdit(onePaste.id)}>Edit</button>
-      <button onClick={()=> setShowComments(!showComments)}>Comments</button>
-      {showComments && <Comments id={onePaste.id}/>}
+      <button onClick={() => setShowComments(!showComments)}>Comments</button>
+      {showComments && <Comments id={onePaste.id} />}
     </div>
   ));
 

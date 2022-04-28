@@ -1,4 +1,4 @@
 export default interface CommentTypes {
-    commentid: number;
-    comment: string;
-  }
+  commentid: number;
+  comment: string;
+}
