@@ -25,7 +25,8 @@ export default function Comments(props:{ id: number; }): JSX.Element {
           }
     }
 
-    const listOfComments = allComments.map((oneComment:CommentTypes) => <li key={oneComment.commentid}>{oneComment}</li>)
+    const listOfComments = allComments.map((oneComment:CommentTypes) => 
+    <li key={oneComment.commentid}>{oneComment.comment}</li>)
  
 
     return(
@@ -43,7 +44,7 @@ export default function Comments(props:{ id: number; }): JSX.Element {
       <button onClick={() => submitComment}>Submit</button>
         </div>
 
-        
+        {listOfComments}
 
         </>
         
