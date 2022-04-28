@@ -2,6 +2,7 @@ import PasteTypes from "./pasteTypes";
 import { useState } from "react";
 import { useEffect } from "react";
 import axios from "axios";
+import Comments from "./comments";
 
 export default function Main(): JSX.Element {
   const [paste, setPaste] = useState<PasteTypes[]>([]);
@@ -11,6 +12,7 @@ export default function Main(): JSX.Element {
   const [id, setId] = useState<number>();
   const [click, setClick] = useState<boolean>(true);
   const [showMore, setShowMore] = useState<boolean>(false)  
+  const [showComments, setShowComments] = useState<boolean>(false)  
 
 
   const herokuURL = "https://pastebinserver.herokuapp.com/pastes";
@@ -92,6 +94,8 @@ export default function Main(): JSX.Element {
       <a href="#" onClick={() => setShowMore(!showMore)}>{showMore ? "show less" : "show more"}</a>
       <button onClick={() => handleDelete(onePaste.id)}>Delete</button>
       <button onClick={() => handleEdit(onePaste.id)}>Edit</button>
+      <button onClick={()=> setShowComments(!showComments)}>Comments</button>
+      {showComments && <Comments/>}
     </div>
   ));
 
