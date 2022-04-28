@@ -1,20 +1,33 @@
 import { useState } from "react";
+import { useEffect } from "react";
 import axios from "axios";
+import CommentTypes from "./commentTypes";
 
 export default function Comments(props:{ id: number; }): JSX.Element {
     const [comment, setComment] = useState("")
+    const [allComments, setAllComments] = useState<CommentTypes[]>([])
+
+    useEffect(() => {
+        async function getAllComments() {
+          const data = await axios.get(`https://pastebinserver.herokuapp.com/pastes/${props.id}/comments`);
+          setAllComments(data.data);
+        }
+        getAllComments();
+      }, [allComments]);
+
     async function submitComment () {
         if (comment === "") {
             window.alert("Comment needs to be added for submission");
           } else {
             await axios.post(`https://pastebinserver.herokuapp.com/pastes/${props.id}`, {
-              comment: comment
+              comments: comment
             });
           }
-          
     }
 
-    
+    const listOfComments = allComments.map((oneComment:CommentTypes) => <li key={oneComment.commentid}>{oneComment}</li>)
+ 
+
     return(
         <>
         <div>
@@ -29,7 +42,9 @@ export default function Comments(props:{ id: number; }): JSX.Element {
       />
       <button onClick={() => submitComment}>Submit</button>
         </div>
-        {console.log(comment)}
+
+        
+
         </>
         
     )
