@@ -89,7 +89,7 @@ export default function Main(): JSX.Element {
       {onePaste.title}
       {onePaste.language}
       {showMore ? (onePaste.code):(onePaste.code.substring(0,500))}
-      <a href="#" onClick={() => setShowMore(!showMore)}>show more</a>
+      <a href="#" onClick={() => setShowMore(!showMore)}>{showMore ? "show less" : "show more"}</a>
       <button onClick={() => handleDelete(onePaste.id)}>Delete</button>
       <button onClick={() => handleEdit(onePaste.id)}>Edit</button>
     </div>
