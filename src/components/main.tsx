@@ -12,7 +12,8 @@ export default function Main(): JSX.Element {
   const [id, setId] = useState<number>();
   const [click, setClick] = useState<boolean>(true);
   const [showMore, setShowMore] = useState<boolean>(false)  
-  const [showComments, setShowComments] = useState<boolean>(false)  
+  const [showComments, setShowComments] = useState<boolean>(false)
+  
 
 
   const herokuURL = "https://pastebinserver.herokuapp.com/pastes";
