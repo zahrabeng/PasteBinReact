@@ -86,7 +86,7 @@ export default function Main(): JSX.Element {
 
 
   const allPastes = paste.map((onePaste: PasteTypes) => (
-    <div key={onePaste.id}> 
+    <div key={onePaste.id} className="each-paste"> 
       <div className="paste-title">{onePaste.title}</div>
       <div className="paste-language">Language: {onePaste.language}</div>
       <div className="paste-code">{showMore ? onePaste.code : onePaste.code.substring(0, 500)}
@@ -105,7 +105,8 @@ export default function Main(): JSX.Element {
 
   return (
     <>
-    <h1 className="title">Paste Bin Website</h1>
+    <div className="website-background">
+    <h1 className="title">🗑️Paste Bin Website🗑️</h1>
     <p className="paragraph">Please paste your code below!</p>
     <div className="input-title">
       <input
@@ -134,6 +135,7 @@ export default function Main(): JSX.Element {
       <h3 className="paragraph" >Previous Pastes</h3>
       <div className="previous-pastes">
       {allPastes}
+      </div>
       </div>
     </>
   );
