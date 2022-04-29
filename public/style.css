@@ -8,6 +8,7 @@ body{
     text-align: center;
     font-weight: 300;
     font-size: 50px;
+    text-decoration: underline;
 }
 
 .allpastes {
@@ -66,4 +67,12 @@ body{
 
 .submit-comment{
     text-align: center;
+}
+
+.showMoreButton{
+    background: none;
+    border:none;
+    cursor:pointer;
+    color: purple;
+    text-decoration: underline;
 }

@@ -15,7 +15,7 @@ export default function Comments(props: { id: number }): JSX.Element {
       setAllComments(data.data);
     }
     getAllComments();
-  }, [allComments]);
+  }, [allComments, props.id]);
 
   async function submitComment() {
     if (comment === "") {

@@ -84,15 +84,16 @@ export default function Main(): JSX.Element {
     );
   }
 
+
   const allPastes = paste.map((onePaste: PasteTypes) => (
     <div key={onePaste.id}> 
       <div className="paste-title">{onePaste.title}</div>
       <div className="paste-language">Language: {onePaste.language}</div>
       <div className="paste-code">{showMore ? onePaste.code : onePaste.code.substring(0, 500)}
       </div>
-      <a href="#" onClick={() => setShowMore(!showMore)}>
+      <button className="showMoreButton"  onClick={() => setShowMore(!showMore)}>
         {showMore ? "show less" : "show more"}
-      </a>
+      </button>
       <div className="buttons">
       <button onClick={() => handleDelete(onePaste.id)}>Delete</button>
       <button onClick={() => handleEdit(onePaste.id)}>Edit</button>
