@@ -28,6 +28,7 @@ export default function Comments(props: { id: number }): JSX.Element {
         }
       );
     }
+    setComment('')
   }
 
   async function deleteComment(commentId: number) {
@@ -38,15 +39,17 @@ export default function Comments(props: { id: number }): JSX.Element {
 
   const listOfComments = allComments.map((oneComment: CommentTypes) => (
     <div key={oneComment.commentid}>
-      {oneComment.comment}
+      <div className="comment"> Comment: {oneComment.comment}
       <button onClick={() => deleteComment(oneComment.commentid)}>
         Delete
       </button>
+      </div>
     </div>
   ));
 
   return (
     <>
+    <div className="submit-comment">
       <div>
         <textarea
           id="allpastes"
@@ -55,10 +58,9 @@ export default function Comments(props: { id: number }): JSX.Element {
           cols={30}
           value={comment}
           onChange={(e) => setComment(e.target.value)}
-        />
-        <button onClick={() => submitComment}>Submit</button>
-      </div>
-
+        /></div>
+        <button onClick={() => submitComment()}>Submit</button>
+        </div>
       {listOfComments}
     </>
   );

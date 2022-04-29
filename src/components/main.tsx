@@ -85,39 +85,55 @@ export default function Main(): JSX.Element {
   }
 
   const allPastes = paste.map((onePaste: PasteTypes) => (
-    <div key={onePaste.id}>
-      {onePaste.title}
-      {onePaste.language}
-      {showMore ? onePaste.code : onePaste.code.substring(0, 500)}
+    <div key={onePaste.id}> 
+      <div className="paste-title">{onePaste.title}</div>
+      <div className="paste-language">Language: {onePaste.language}</div>
+      <div className="paste-code">{showMore ? onePaste.code : onePaste.code.substring(0, 500)}
+      </div>
       <a href="#" onClick={() => setShowMore(!showMore)}>
         {showMore ? "show less" : "show more"}
       </a>
+      <div className="buttons">
       <button onClick={() => handleDelete(onePaste.id)}>Delete</button>
       <button onClick={() => handleEdit(onePaste.id)}>Edit</button>
       <button onClick={() => setShowComments(!showComments)}>Comments</button>
       {showComments && <Comments id={onePaste.id} />}
+      </div>
     </div>
   ));
 
   return (
     <>
+    <h1 className="title">Paste Bin Website</h1>
+    <p className="paragraph">Please paste your code below!</p>
+    <div className="input-title">
+      <input
+        placeholder="Type title here"
+        onChange={(e) => setTitle(e.target.value)}
+        value={title}
+      />
+      </div>
+    <div className="allpastes">
       <textarea
-        id="allpastes"
+        className="allpastes"
         name="allpastes"
         rows={15}
         cols={80}
         value={code}
         onChange={(e) => setCode(e.target.value)}
       />
-      <input
-        placeholder="Type title here"
-        onChange={(e) => setTitle(e.target.value)}
-        value={title}
-      />
+      </div>
+      <div className="add-paste-buttons">
       {dropDownList()}
-      {click && <button onClick={submitData}>SUBMIT</button>}
-      {!click && <button onClick={editPaste}>SUBMIT EDIT</button>}
+      <div className="buttons">
+      {click && <button onClick={()=>submitData()}>SUBMIT</button>}
+      {!click && <button onClick={()=>editPaste()}>SUBMIT EDIT</button>}
+      </div>
+      </div>
+      <h3 className="paragraph" >Previous Pastes</h3>
+      <div className="previous-pastes">
       {allPastes}
+      </div>
     </>
   );
 }
