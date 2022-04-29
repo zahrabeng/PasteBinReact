@@ -28,7 +28,7 @@ export default function Comments(props: { id: number }): JSX.Element {
         }
       );
     }
-    setComment('')
+    setComment("");
   }
 
   async function deleteComment(commentId: number) {
@@ -39,28 +39,31 @@ export default function Comments(props: { id: number }): JSX.Element {
 
   const listOfComments = allComments.map((oneComment: CommentTypes) => (
     <div key={oneComment.commentid}>
-      <div className="comment"> Comment: {oneComment.comment}
-      <button onClick={() => deleteComment(oneComment.commentid)}>
-        Delete
-      </button>
+      <div className="comment">
+        {" "}
+        Comment: {oneComment.comment}
+        <button onClick={() => deleteComment(oneComment.commentid)}>
+          Delete
+        </button>
       </div>
     </div>
   ));
 
   return (
     <>
-    <div className="submit-comment">
-      <div>
-        <textarea
-          id="allpastes"
-          name="allpastes"
-          rows={10}
-          cols={30}
-          value={comment}
-          onChange={(e) => setComment(e.target.value)}
-        /></div>
-        <button onClick={() => submitComment()}>Submit</button>
+      <div className="submit-comment">
+        <div>
+          <textarea
+            id="allpastes"
+            name="allpastes"
+            rows={10}
+            cols={30}
+            value={comment}
+            onChange={(e) => setComment(e.target.value)}
+          />
         </div>
+        <button onClick={() => submitComment()}>Submit</button>
+      </div>
       {listOfComments}
     </>
   );

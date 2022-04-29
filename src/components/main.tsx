@@ -84,58 +84,56 @@ export default function Main(): JSX.Element {
     );
   }
 
-
   const allPastes = paste.map((onePaste: PasteTypes) => (
-    <div key={onePaste.id} className="each-paste"> 
+    <div key={onePaste.id} className="each-paste">
       <div className="paste-title">{onePaste.title}</div>
       <div className="paste-language">Language: {onePaste.language}</div>
-      <div className="paste-code">{showMore ? onePaste.code : onePaste.code.substring(0, 500)}
+      <div className="paste-code">
+        {showMore ? onePaste.code : onePaste.code.substring(0, 500)}
       </div>
-      <button className="showMoreButton"  onClick={() => setShowMore(!showMore)}>
+      <button className="showMoreButton" onClick={() => setShowMore(!showMore)}>
         {showMore ? "show less" : "show more"}
       </button>
       <div className="buttons">
-      <button onClick={() => handleDelete(onePaste.id)}>Delete</button>
-      <button onClick={() => handleEdit(onePaste.id)}>Edit</button>
-      <button onClick={() => setShowComments(!showComments)}>Comments</button>
-      {showComments && <Comments id={onePaste.id} />}
+        <button onClick={() => handleDelete(onePaste.id)}>Delete</button>
+        <button onClick={() => handleEdit(onePaste.id)}>Edit</button>
+        <button onClick={() => setShowComments(!showComments)}>Comments</button>
+        {showComments && <Comments id={onePaste.id} />}
       </div>
     </div>
   ));
 
   return (
     <>
-    <div className="website-background">
-    <h1 className="title">🗑️Paste Bin Website🗑️</h1>
-    <p className="paragraph">Please paste your code below!</p>
-    <div className="input-title">
-      <input
-        placeholder="Type title here"
-        onChange={(e) => setTitle(e.target.value)}
-        value={title}
-      />
-      </div>
-    <div className="allpastes">
-      <textarea
-        className="allpastes"
-        name="allpastes"
-        rows={15}
-        cols={80}
-        value={code}
-        onChange={(e) => setCode(e.target.value)}
-      />
-      </div>
-      <div className="add-paste-buttons">
-      {dropDownList()}
-      <div className="buttons">
-      {click && <button onClick={()=>submitData()}>SUBMIT</button>}
-      {!click && <button onClick={()=>editPaste()}>SUBMIT EDIT</button>}
-      </div>
-      </div>
-      <h3 className="paragraph" >Previous Pastes</h3>
-      <div className="previous-pastes">
-      {allPastes}
-      </div>
+      <div className="website-background">
+        <h1 className="title">🗑️Paste Bin Website🗑️</h1>
+        <p className="paragraph">Please paste your code below!</p>
+        <div className="input-title">
+          <input
+            placeholder="Type title here"
+            onChange={(e) => setTitle(e.target.value)}
+            value={title}
+          />
+        </div>
+        <div className="allpastes">
+          <textarea
+            className="allpastes"
+            name="allpastes"
+            rows={15}
+            cols={80}
+            value={code}
+            onChange={(e) => setCode(e.target.value)}
+          />
+        </div>
+        <div className="add-paste-buttons">
+          {dropDownList()}
+          <div className="buttons">
+            {click && <button onClick={() => submitData()}>SUBMIT</button>}
+            {!click && <button onClick={() => editPaste()}>SUBMIT EDIT</button>}
+          </div>
+        </div>
+        <h3 className="paragraph">Previous Pastes</h3>
+        <div className="previous-pastes">{allPastes}</div>
       </div>
     </>
   );
