@@ -37,18 +37,19 @@ body{
     background-color: #F4F1BB;
     margin: auto;
     width: 80%;
-    border: 2px solid teal;
-    border-radius: 5%;
+    border-radius: 1%;
     padding: 15px;
 }
 
 .each-paste{
     background-color: #eee0b9;
-    border: solid 2px teal;
-    border-radius: 10px;
+    border: solid 2px rgb(0, 180, 180);
+    border-radius: 5px;
     padding: 10px;
     margin: 20px;
 }
+
+
 .paragraph{
     color:#0f1953;
     text-align: center;
@@ -56,8 +57,8 @@ body{
     background-color: #0693a0;
     border-radius: 5px;
     width: 300px;
-    margin:15px auto;
-
+    margin:30px auto;
+    padding: 9px;
 }
 
 .paste-title{
@@ -101,4 +102,6 @@ body{
     background-color: #7fadb3;
     padding: 10px;
     border-radius: 20px;
+    background-image: url("https://www.transparenttextures.com/patterns/psychedelic.png");
+
 }

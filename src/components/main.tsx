@@ -110,7 +110,7 @@ export default function Main(): JSX.Element {
         <p className="paragraph">Please paste your code below!</p>
         <div className="input-title">
           <input
-            placeholder="Type title here"
+            placeholder="Type title here..."
             onChange={(e) => setTitle(e.target.value)}
             value={title}
           />
